@@ -2,7 +2,13 @@
   "name": "@storeflow/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "prepare": "husky install",
+    "prettier": "prettier --write ."
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~18.2.0",
@@ -54,6 +60,7 @@
     "@capacitor/angular": "^2.0.3",
     "@capacitor/core": "^7.1.0",
     "@capacitor/ios": "^7.1.0",
+    "husky": "^9.1.7",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   }

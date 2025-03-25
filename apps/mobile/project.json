@@ -19,7 +19,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/mobile/public"
+            "input": "apps/web/public",
+            "output": "/images/"
           }
         ],
         "styles": ["apps/mobile/src/styles.scss"],
