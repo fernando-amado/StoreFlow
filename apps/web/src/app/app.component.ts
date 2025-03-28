@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   selector: 'app-root',
-  template: `<router-outlet> </router-outlet>`,
+  template: `<h1>Hola Mundo</h1>
+    <button mat-button>Hello</button> `,
 })
 export class AppComponent {}
