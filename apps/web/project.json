@@ -22,6 +22,9 @@
             "input": "apps/web/public"
           }
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/design-system/src/lib/styles"]
+        },
         "styles": ["apps/web/src/styles.scss"],
         "scripts": []
       },
