@@ -16,13 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/mobile/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/web/public",
-            "output": "/images/"
-          }
-        ],
+        "assets": ["apps/mobile/src/assets"],
         "styles": ["apps/mobile/src/styles.scss"],
         "scripts": []
       },
@@ -45,7 +39,14 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "assets": [
+            {
+              "glob": "**.*",
+              "input": "apps/web/public/images",
+              "output": "/images/"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -69,7 +70,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/**/*.ts", "{projectRoot}/**/*.html"]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

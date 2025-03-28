@@ -5,10 +5,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   selector: 'app-root',
-  template: `<router-outlet> 
-
-
-
-  </router-outlet>`,
+  template: ` <img src="images/icon-principal.svg" alt="Hola" />
+    <router-outlet> </router-outlet>`,
 })
 export class AppComponent {}
