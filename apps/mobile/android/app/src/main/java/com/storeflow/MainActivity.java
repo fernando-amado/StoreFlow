@@ -1,4 +1,4 @@
-package storeflow.app;
+package com.storeflow;
 
 import com.getcapacitor.BridgeActivity;
 

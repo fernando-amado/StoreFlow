@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'storeflow.app',
+  appId: 'com.storeflow',
   appName: 'StoreFlow',
-  webDir: '../../dist/apps/browser/mobile',
+  webDir: '../../dist/apps/mobile/browser'
 };
 
 export default config;

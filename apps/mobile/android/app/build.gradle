@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "storeflow.app"
+    namespace "com.storeflow"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "storeflow.app"
+        applicationId "com.storeflow"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
