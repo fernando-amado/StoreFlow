@@ -18,5 +18,6 @@ import { Utilidades } from './utilidades';
 export class AppComponent {
   constructor() {
     Utilidades.cambiarStatusBar('Light');
+    Utilidades.showSplash();
   }
 }
