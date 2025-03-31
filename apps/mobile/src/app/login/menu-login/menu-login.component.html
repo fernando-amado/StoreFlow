@@ -3,8 +3,8 @@
   <div class="flex-1 column gap-20 justify-content-center align-items-center">
     <img width="167" height="134" src="/images/cubo.svg" />
     <div class="text-center">
-      <h2 class="color-primary">Bienvenido</h2>
-      <p class="color-on-surface">
+      <h2 class="color-primary" i18n>Bienvenido</h2>
+      <p class="color-on-surface" i18n>
         Selecciona la categoría a la que perteneces
       </p>
     </div>
@@ -13,6 +13,8 @@
         class="width-209 justify-content-between"
         mat-raised-button
         color="primary"
+        data-testid="botonVendedor"
+        i18n
       >
         Vendedor <mat-icon iconPositionEnd>keyboard_arrow_right</mat-icon>
       </button>
@@ -20,6 +22,8 @@
         class="width-209 bg-white justify-content-between"
         mat-stroked-button
         color="primary"
+        data-testid="botonCliente"
+        i18n
       >
         Cliente <mat-icon iconPositionEnd>keyboard_arrow_right</mat-icon>
       </button>
