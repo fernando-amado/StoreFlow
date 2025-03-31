@@ -164,3 +164,7 @@ $variant-colors: (
   'warning': $warning,
   'grey': $grey,
 );
+
+.mat-mdc-outlined-button.mat-primary {
+  --mdc-outlined-button-outline-color: map-get($primary, 800) !important;
+}
