@@ -18,3 +18,7 @@
 .color-white {
   color: #ffffff;
 }
+
+.color-grey-800 {
+  color: map-get($grey, 800);
+}

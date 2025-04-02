@@ -147,6 +147,7 @@ $light-theme: mat.m2-define-light-theme(
       warn: $light-warn,
       success: $light-success,
       warning: $light-warning,
+      grey: $grey,
     ),
   )
 );
@@ -167,4 +168,8 @@ $variant-colors: (
 
 .mat-mdc-outlined-button.mat-primary {
   --mdc-outlined-button-outline-color: map-get($primary, 800) !important;
+}
+
+.mat-mdc-icon-button {
+  color: map-get($grey, 600) !important;
 }

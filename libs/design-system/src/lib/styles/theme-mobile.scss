@@ -11,3 +11,6 @@
 @include mat.all-component-typographies(
   tipografias-mobile.$typography-mobile-global-config
 );
+
+@include mat.icon-button-density(-4);
+@include mat.form-field-density(-4);
