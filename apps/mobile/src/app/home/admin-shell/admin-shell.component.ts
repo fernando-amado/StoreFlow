@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AuthService, Utilidades } from '@storeflow/design-system';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-admin-shell',
   standalone: true,
-  imports: [CommonModule],
+  imports: [HeaderComponent],
   templateUrl: './admin-shell.component.html',
   styleUrl: './admin-shell.component.scss',
 })
@@ -13,5 +13,9 @@ export class AdminShellComponent {
   authService = inject(AuthService);
   constructor() {
     this.authService.obtenerDatosSesion();
+  }
+
+  get sesion() {
+    return Utilidades.obtenerSesion();
   }
 }

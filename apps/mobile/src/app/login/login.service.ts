@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DatosIngreso, TipoCategoria } from './login.model';
+
+import { TipoCategoria } from '@storeflow/design-system';
+import { DatosIngreso } from '../app.model';
 import { LoginUrls } from './login.urls';
 
 @Injectable()

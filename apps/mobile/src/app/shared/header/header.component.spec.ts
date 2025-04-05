@@ -41,4 +41,23 @@ describe('HeaderComponent', () => {
     );
     expect(botonVolver).toBeTruthy();
   });
+
+  it('Debe ocultarse la "seccion-avatar" cuando mostrarAvatar sea false ', () => {
+    fixture.componentRef.setInput('mostrarAvatar', false);
+    fixture.detectChanges();
+
+    const seccionAvatar = fixture.debugElement.query(
+      By.css(`[data-testid="seccion-avatar"]`)
+    );
+    expect(seccionAvatar).toBeFalsy();
+  });
+  it('Debe mostrarse la "seccion-avatar" cuando mostrarAvatar sea true', () => {
+    fixture.componentRef.setInput('mostrarAvatar', true);
+    fixture.detectChanges();
+
+    const seccionAvatar = fixture.debugElement.query(
+      By.css(`[data-testid="seccion-avatar"]`)
+    );
+    expect(seccionAvatar).toBeTruthy();
+  });
 });

@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SharedModule } from '@storeflow/design-system';
-import { DatosIngreso } from '../../login/login.model';
+import { DatosIngreso } from '../../app.model';
 
 @Component({
   selector: 'app-login',

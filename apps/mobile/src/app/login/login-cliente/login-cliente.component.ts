@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@storeflow/design-system';
+import { AuthService, TipoCategoria } from '@storeflow/design-system';
+import { DatosIngreso } from '../../app.model';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { LoginComponent } from '../../shared/login/login.component';
-import { DatosIngreso, TipoCategoria } from '../login.model';
 import { LoginService } from '../login.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginClienteComponent {
   authService = inject(AuthService);
 
   ingresar(datosIngreso: DatosIngreso) {
-    this.service.ingresar(datosIngreso, TipoCategoria.cliente).subscribe({
+    this.service.ingresar(datosIngreso, TipoCategoria.Cliente).subscribe({
       next: ({ token }) => {
         this.authService.registrarToken(token);
         this.router.navigateByUrl('/home');
