@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -10,7 +9,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideRouter([])],
+      providers: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -23,27 +22,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Debe ocultarse el botón de volver si no hay ruta', () => {
-    fixture.componentRef.setInput('rutaVolver', null);
-    fixture.detectChanges();
-
-    const botonVolver = fixture.debugElement.query(
-      By.css(`[name="boton-volver"]`)
-    );
-    expect(botonVolver).toBeNull();
-  });
-  it('Debe mostrarse el botón de volver si tiene alguna ruta', () => {
-    fixture.componentRef.setInput('rutaVolver', 'Home');
-    fixture.detectChanges();
-
-    const botonVolver = fixture.debugElement.query(
-      By.css(`[name="boton-volver"]`)
-    );
-    expect(botonVolver).toBeTruthy();
-  });
-
-  it('Debe ocultarse la "seccion-avatar" cuando mostrarAvatar sea false ', () => {
-    fixture.componentRef.setInput('mostrarAvatar', false);
+  it('Debe ocultarse la "seccion-avatar" cuando no tenga nombre de usuario ', () => {
     fixture.detectChanges();
 
     const seccionAvatar = fixture.debugElement.query(
@@ -51,8 +30,8 @@ describe('HeaderComponent', () => {
     );
     expect(seccionAvatar).toBeFalsy();
   });
-  it('Debe mostrarse la "seccion-avatar" cuando mostrarAvatar sea true', () => {
-    fixture.componentRef.setInput('mostrarAvatar', true);
+  it('Debe mostrarse la "seccion-avatar" cuando traiga nombre de usuario', () => {
+    fixture.componentRef.setInput('nombreUsuario', 'pepito');
     fixture.detectChanges();
 
     const seccionAvatar = fixture.debugElement.query(

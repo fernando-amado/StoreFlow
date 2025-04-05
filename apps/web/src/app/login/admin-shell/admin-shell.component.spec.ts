@@ -6,7 +6,7 @@ import {
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';
@@ -16,7 +16,6 @@ describe('AdminShellComponent', () => {
   let component: AdminShellComponent;
   let fixture: ComponentFixture<AdminShellComponent>;
   let httpMock: HttpTestingController;
-  let router: Partial<Router>;
   const solicitud = { correo: 'hola@gmail.co', contrasena: '123456' };
 
   beforeEach(async () => {
@@ -30,7 +29,6 @@ describe('AdminShellComponent', () => {
         provideHttpClientTesting(),
       ],
     }).compileComponents();
-    router = TestBed.inject(Router);
     httpMock = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(AdminShellComponent);
     component = fixture.componentInstance;
@@ -54,7 +52,7 @@ describe('AdminShellComponent', () => {
     expect(peticion.request.body).toEqual(solicitud);
   });
 
-  it('debe desahbilitar el boton de ingresar cuando el formulario es invalido', () => {
+  it('debe deshabilitar el boton de ingresar cuando el formulario es invalido', () => {
     const boton = fixture.debugElement.query(
       By.css('button[data-testid="boton-ingresar"]')
     );
