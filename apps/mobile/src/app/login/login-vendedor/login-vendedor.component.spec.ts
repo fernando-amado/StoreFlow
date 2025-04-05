@@ -49,4 +49,15 @@ describe('LoginVendedorComponent', () => {
       tipoCategoria: TipoCategoria.Vendedor,
     });
   });
+
+  it('debe redirigir a la ruta "/home" cuando se llame el metodo "ingresar" y el servicio devuelva un token', () => {
+    component.ingresar(solicitud);
+    const peticion = httpMock.expectOne(LoginUrls.ingresar);
+    peticion.flush({
+      token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+    });
+
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/home');
+  });
 });
