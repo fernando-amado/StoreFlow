@@ -8,10 +8,10 @@ export class Utilidades {
     await StatusBar.setStyle({ style: Style[style] });
   }
 
-  static async showSplash() {
-    await SplashScreen.show({
-      autoHide: true,
-      showDuration: 3000,
-    });
-  }
+  // static async showSplash() {
+  //   await SplashScreen.show({
+  //     autoHide: true,
+  //     showDuration: 3000,
+  //   });
+  // }
 }
