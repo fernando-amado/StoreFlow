@@ -14,9 +14,9 @@ import { HeaderComponent } from '../../shared/header/header.component';
   styleUrl: './admin-shell.component.scss',
 })
 export class AdminShellComponent {
-  // quitar
-  categoria = TipoCategoria.Vendedor;
+  //borrar
   nombreUsuario = 'Camilo Barreto';
+  categoriaUsuario = TipoCategoria.Cliente;
   authService = inject(AuthService);
   constructor() {
     this.authService.obtenerDatosSesion();
