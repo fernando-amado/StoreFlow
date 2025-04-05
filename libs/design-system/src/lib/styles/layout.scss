@@ -63,8 +63,10 @@
   height: calc(100% - (env(safe-area-inset-top) + env(safe-area-inset-bottom)));
 }
 
-@media only screen and (max-width: 768px) {
-  .display-none-s {
-    display: none;
-  }
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
 }

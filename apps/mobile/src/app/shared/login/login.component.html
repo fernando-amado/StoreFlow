@@ -10,15 +10,25 @@
           Ingresa tus datos para acceder a tu información.
         </p>
       </div>
-      <div class="column gap-8 width-100">
+      <div
+        class="column gap-8 width-100"
+        data-testid="formulario-login"
+        [formGroup]="formulario"
+      >
         <mat-form-field appearance="outline" class="bg-white">
           <mat-label i18n="login.correo">Correo</mat-label>
-          <input type="email" matInput data-testid="input-login-correo" />
+          <input
+            formControlName="correo"
+            type="email"
+            matInput
+            data-testid="input-login-correo"
+          />
         </mat-form-field>
         <div class="row gap-9 align-items-center">
           <mat-form-field appearance="outline" class="bg-white flex-1">
             <mat-label i18n="login.contrasena">Contraseña</mat-label>
             <input
+              formControlName="contrasena"
               [type]="tipoInput"
               matInput
               data-testid="input-login-contrasena"
@@ -39,6 +49,8 @@
           color="primary"
           mat-raised-button
           i18n="login.ingresar"
+          [disabled]="!formulario.valid"
+          (click)="emitirIngresar()"
         >
           Ingresar
         </button>

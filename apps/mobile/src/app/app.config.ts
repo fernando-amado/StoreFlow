@@ -1,6 +1,15 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
+import {
+  AuthInterceptor,
+  StoreFlowInterceptor,
+} from '@storeflow/design-system';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -8,5 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([StoreFlowInterceptor, AuthInterceptor])
+    ),
   ],
 };
