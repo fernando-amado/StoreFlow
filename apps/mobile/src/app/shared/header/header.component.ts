@@ -19,7 +19,7 @@ import { SharedModule } from '@storeflow/design-system';
           <mat-icon class="icon-size-16 color-grey">arrow_back</mat-icon>
         </button>
       }
-      <img src="/images/icono-header-store-flow.svg" />
+      <img src="assets/images/icono-header-store-flow.svg" />
     </div>
   </mat-toolbar> `,
 })

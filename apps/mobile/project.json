@@ -51,14 +51,7 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true,
-          "assets": [
-            {
-              "glob": "**.*",
-              "input": "apps/mobile/public/images",
-              "output": "/images/"
-            }
-          ]
+          "sourceMap": true
         }
       },
       "defaultConfiguration": "production"
