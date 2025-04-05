@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@storeflow/design-system';
-import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { LoginComponent } from '../../shared/login/login.component';
 import { DatosIngreso, TipoCategoria } from '../login.model';
@@ -11,7 +10,7 @@ import { LoginService } from '../login.service';
   selector: 'app-login-cliente',
   standalone: true,
   imports: [LoginComponent, HeaderComponent],
-  providers: [LoginService, AlertaService, AuthService],
+  providers: [LoginService, AuthService],
   template: `<div class="column heigth-100">
     <app-header rutaVolver="/"></app-header>
     <div class="contenido-mobile column">
