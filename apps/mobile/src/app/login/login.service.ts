@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DatosIngreso, TipoCategoria } from './login.model';
 import { LoginUrls } from './login.urls';
 
@@ -13,10 +13,10 @@ export class LoginService {
     tipoCategoria: TipoCategoria
   ): Observable<{ token: string }> {
     //cambiar por el servicio real
-    return this.http.post<{ token: string }>(LoginUrls.ingresar, {
-      datosIngreso,
-      tipoCategoria,
-    });
-    // return of({ token: 'hola soy token' });
+    // return this.http.post<{ token: string }>(LoginUrls.ingresar, {
+    //   datosIngreso,
+    //   tipoCategoria,
+    // });
+    return of({ token: 'hola soy token' });
   }
 }

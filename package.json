@@ -76,6 +76,7 @@
     "@capawesome/capacitor-android-edge-to-edge-support": "^7.1.0",
     "@ngrx/signals": "^18.1.1",
     "@nxext/capacitor": "^19.1.2",
+    "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   },
