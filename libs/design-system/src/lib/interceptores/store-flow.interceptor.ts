@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -35,12 +36,7 @@ function obtenerMensaje(httpError: HttpErrorResponse): string {
 
     if (error instanceof ArrayBuffer) {
       const decoder = new TextDecoder('utf-8');
-      try {
-        const decoded = decoder.decode(error);
-        return JSON.parse(decoded).message ?? decoded;
-      } catch (_) {
-        return 'Error inesperado';
-      }
+      error = decoder.decode(error);
     }
 
     if (httpError.status === 404) {

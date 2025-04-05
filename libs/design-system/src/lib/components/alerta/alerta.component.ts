@@ -8,7 +8,7 @@ import { SharedModule } from '../../modulos/shared-module';
 import { Alerta, Iconos, TipoAlerta } from './alerta.model';
 
 @Component({
-  selector: 'lib-alerta',
+  selector: 'app-alerta',
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './alerta.component.html',

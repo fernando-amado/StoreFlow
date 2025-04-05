@@ -7,7 +7,7 @@ import { Alerta } from './alerta.model';
 export class AlertaService {
   constructor(private snackBar: MatSnackBar) {}
 
-  abrirAlerta(alerta: Alerta, tiempo: number = 3000) {
+  abrirAlerta(alerta: Alerta, tiempo = 3000) {
     this.snackBar.openFromComponent(AlertaComponent, {
       data: alerta,
       duration: tiempo,
