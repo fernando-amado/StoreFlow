@@ -6,6 +6,7 @@ import {
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
+import { TipoCategoria } from '../login.model';
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';
 import { LoginClienteComponent } from './login-cliente.component';
@@ -43,7 +44,10 @@ describe('LoginClienteComponent', () => {
     component.ingresar(solicitud);
     const peticion = httpMock.expectOne(LoginUrls.ingresar);
     expect(peticion.request.method).toEqual('POST');
-    expect(peticion.request.body).toEqual(solicitud);
+    expect(peticion.request.body).toEqual({
+      datosIngreso: solicitud,
+      tipoCategoria: TipoCategoria.cliente,
+    });
   });
 
   it('debe redirigir a la ruta "/home" cuando se llame el metodo "ingresar" y el servicio devuelva un token', () => {
