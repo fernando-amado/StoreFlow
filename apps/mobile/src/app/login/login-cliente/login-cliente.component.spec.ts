@@ -5,8 +5,8 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter, Router } from '@angular/router';
-import { TipoCategoria } from '../login.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TipoCategoria } from '@storeflow/design-system';
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';
 import { LoginClienteComponent } from './login-cliente.component';
@@ -18,21 +18,25 @@ describe('LoginClienteComponent', () => {
   let router: Partial<Router>;
   const solicitud = { correo: 'hola@gmail.co', contrasena: '123456' };
   beforeEach(async () => {
+    router = {
+      navigateByUrl: jest.fn(),
+    };
     await TestBed.configureTestingModule({
       imports: [LoginClienteComponent, BrowserAnimationsModule],
       providers: [
         LoginService,
-        provideRouter([]),
         HttpTestingController,
         provideHttpClient(),
         provideHttpClientTesting(),
+        { provide: Router, useValue: router },
+        { provide: ActivatedRoute, useValue: {} },
       ],
     }).compileComponents();
-    router = TestBed.inject(Router);
+
     httpMock = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(LoginClienteComponent);
     component = fixture.componentInstance;
-    jest.spyOn(router, 'navigateByUrl');
+
     fixture.detectChanges();
   });
 
@@ -46,14 +50,18 @@ describe('LoginClienteComponent', () => {
     expect(peticion.request.method).toEqual('POST');
     expect(peticion.request.body).toEqual({
       datosIngreso: solicitud,
-      tipoCategoria: TipoCategoria.cliente,
+      tipoCategoria: TipoCategoria.Cliente,
     });
   });
 
   it('debe redirigir a la ruta "/home" cuando se llame el metodo "ingresar" y el servicio devuelva un token', () => {
     component.ingresar(solicitud);
     const peticion = httpMock.expectOne(LoginUrls.ingresar);
-    peticion.flush({ token: 'token' });
+    peticion.flush({
+      token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+    });
+
     expect(router.navigateByUrl).toHaveBeenCalledWith('/home');
   });
 });

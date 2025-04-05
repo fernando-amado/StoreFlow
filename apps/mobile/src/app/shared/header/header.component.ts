@@ -41,10 +41,10 @@ import { DescripcionesCategoria } from '../../app.constantes';
 export class HeaderComponent {
   rutaVolver = input<string>();
   mostrarAvatar = input<boolean>();
-  nombreUsuario = input<string>('Camilo Barreto');
+  nombreUsuario = input<string>();
   categoriaUsuario = input<TipoCategoria>();
 
   get descripcionCategoria(): string {
-    return DescripcionesCategoria[this.categoriaUsuario()!] ?? 'Cliente';
+    return DescripcionesCategoria[this.categoriaUsuario() as TipoCategoria];
   }
 }
