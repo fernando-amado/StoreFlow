@@ -8,6 +8,7 @@ import { SharedModule } from '@storeflow/design-system';
   imports: [SharedModule, RouterModule],
   styleUrl: './header.component.scss',
   template: `<mat-toolbar class="sombra-header justify-content-between">
+    <img src="assets/images/icono-header-store-flow.svg" />
     @if (nombreUsuario()) {
       <div class="row gap-4 align-items-center" data-testid="seccion-avatar">
         <p class="color-grey-700">{{ nombreUsuario() }}</p>
