@@ -1,5 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { AuthService, Utilidades } from '@storeflow/design-system';
+import {
+  AuthService,
+  TipoCategoria,
+  Utilidades,
+} from '@storeflow/design-system';
 import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
@@ -10,6 +14,9 @@ import { HeaderComponent } from '../../shared/header/header.component';
   styleUrl: './admin-shell.component.scss',
 })
 export class AdminShellComponent {
+  // quitar
+  categoria = TipoCategoria.Vendedor;
+  nombreUsuario = 'Camilo Barreto';
   authService = inject(AuthService);
   constructor() {
     this.authService.obtenerDatosSesion();
