@@ -40,7 +40,7 @@ export class LoginComponent {
   }
 
   get titulo() {
-    return CategoriaTitulo[this.categoria()!];
+    return CategoriaTitulo[this.categoria() as TipoCategoria];
   }
 
   mostrarContrasena(event: MouseEvent) {
