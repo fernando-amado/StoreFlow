@@ -1,12 +1,10 @@
 <div class="p-16 column gap-16">
-  <div class="p-12 bg-grey-100 radius-4">
-    <h3 class="color-primary" i18n="Hola">Hola {{ nombreUsuario() }}</h3>
-    <p class="color-on-surface" i18n="gestiona tus pedidos y solicitudes aqui">
-      Gestiona tus pedidos y solicitudes aquí
-    </p>
-  </div>
+  <app-card-informacion
+    [titulo]="titulo"
+    [descripcion]="descripcion"
+  ></app-card-informacion>
   <div class="column gap-8">
-    @for (menu of listadoMenu; track $index) {
+    @for (menu of listadoMenu(); track $index) {
       <mat-card
         data-testid="menu-navegacion-mobile"
         class="sombra-card cursor-pointer"

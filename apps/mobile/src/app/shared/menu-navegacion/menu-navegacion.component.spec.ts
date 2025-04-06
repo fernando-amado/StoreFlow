@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { configuracionMenu } from '../home.constantes';
+import { configuracionMenuClientes } from '../../app.constantes';
 import { MenuNavegacionComponent } from './menu-navegacion.component';
 
 describe('MenuNavegacionComponent', () => {
@@ -29,7 +29,9 @@ describe('MenuNavegacionComponent', () => {
   });
 
   it('debe navegar a la ruta segun su seleccion, cuando se le de click al "menu-navegacion-mobile" ', () => {
-    const ruta = `/home/${configuracionMenu[1].ruta}`;
+    fixture.componentRef.setInput('listadoMenu', configuracionMenuClientes);
+    fixture.detectChanges();
+    const ruta = `/home/${configuracionMenuClientes[1].ruta}`;
     const menuNavegacion = fixture.debugElement.queryAll(
       By.css('[data-testid="menu-navegacion-mobile"]')
     )[1];
