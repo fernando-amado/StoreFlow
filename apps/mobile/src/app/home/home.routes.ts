@@ -11,6 +11,13 @@ export const HomeRoutes: Route[] = [
         loadChildren: () =>
           import('../clientes/clientes.routes').then((m) => m.ClientesRoutes),
       },
+      {
+        path: 'vendedores',
+        loadChildren: () =>
+          import('../vendedores/vendedores.routes').then(
+            (m) => m.VendedoresRoutes
+          ),
+      },
     ],
   },
 ];
