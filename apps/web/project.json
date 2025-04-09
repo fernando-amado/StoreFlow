@@ -5,6 +5,12 @@
   "prefix": "app",
   "sourceRoot": "apps/web/src",
   "tags": [],
+  "i18n": {
+    "sourceLocale": "es-CO",
+    "locales": {
+      "en-US": "apps/web/src/locale/messages.en-US.xlf"
+    }
+  },
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -13,15 +19,10 @@
         "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
         "browser": "apps/web/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js", "@angular/localize/init"],
         "tsConfig": "apps/web/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/web/public"
-          }
-        ],
+        "assets": ["apps/web/src/assets"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/design-system/src/lib/styles"]
         },
@@ -29,11 +30,14 @@
         "scripts": []
       },
       "configurations": {
+        "en-US": {
+          "localize": ["en-US"]
+        },
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
+              "maximumWarning": "1mb",
               "maximumError": "1mb"
             },
             {
@@ -67,7 +71,8 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "web:build"
+        "buildTarget": "web:build",
+        "outputPath": "apps/web/src/locale"
       }
     },
     "lint": {

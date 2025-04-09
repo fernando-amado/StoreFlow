@@ -17,6 +17,7 @@
     "@angular/cli": "~18.2.0",
     "@angular/compiler-cli": "~18.2.0",
     "@angular/language-service": "~18.2.0",
+    "@angular/localize": "^18.2.0",
     "@angular/material": "^18.2.0",
     "@capacitor/cli": "^7.1.0",
     "@eslint/js": "^9.8.0",
@@ -66,9 +67,20 @@
     "@angular/router": "~18.2.0",
     "@capacitor/android": "^7.1.0",
     "@capacitor/angular": "^2.0.3",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/core": "^7.1.0",
     "@capacitor/ios": "^7.1.0",
+    "@capacitor/splash-screen": "^7.0.0",
+    "@capacitor/status-bar": "^7.0.0",
+    "@capawesome/capacitor-android-edge-to-edge-support": "^7.1.0",
+    "@ngrx/signals": "^18.1.1",
+    "@nxext/capacitor": "^19.1.2",
+    "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
-  }
+  },
+  "workspaces": [
+    "./apps/*"
+  ]
 }
