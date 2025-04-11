@@ -7,6 +7,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
 import { TipoCategoria } from '@storeflow/design-system';
+import { TipoAlerta } from 'libs/design-system/src/lib/components/alerta/alerta.model';
+import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
+import { MensajesAlertas } from '../../app.constantes';
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';
 import { LoginVendedorComponent } from './login-vendedor.component';
@@ -16,8 +19,13 @@ describe('LoginVendedorComponent', () => {
   let fixture: ComponentFixture<LoginVendedorComponent>;
   let httpMock: HttpTestingController;
   let router: Partial<Router>;
+  let alertaService: Partial<AlertaService>;
   const solicitud = { correo: 'hola@gmail.co', contrasena: '123456' };
+
   beforeEach(async () => {
+    alertaService = {
+      abrirAlerta: jest.fn(),
+    };
     await TestBed.configureTestingModule({
       imports: [LoginVendedorComponent, BrowserAnimationsModule],
       providers: [
@@ -26,6 +34,10 @@ describe('LoginVendedorComponent', () => {
         HttpTestingController,
         provideHttpClient(),
         provideHttpClientTesting(),
+        {
+          provide: AlertaService,
+          useValue: alertaService,
+        },
       ],
     }).compileComponents();
     router = TestBed.inject(Router);
@@ -59,5 +71,19 @@ describe('LoginVendedorComponent', () => {
     });
 
     expect(router.navigateByUrl).toHaveBeenCalledWith('/home/vendedores');
+  });
+
+  it('debe abrir la alerta con mensaje de error de credenciale, cuando el metodo "ingresar" sea status 401', () => {
+    component.ingresar(solicitud);
+    const peticion = httpMock.expectOne(LoginUrls.ingresar);
+    peticion.flush(
+      { message: 'Unauthorized' },
+      { status: 401, statusText: 'Unauthorized' }
+    );
+
+    expect(alertaService.abrirAlerta).toHaveBeenCalledWith({
+      tipo: TipoAlerta.Danger,
+      descricion: MensajesAlertas.credencialesIncorrectas,
+    });
   });
 });
