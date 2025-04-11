@@ -24,7 +24,7 @@ describe('RegistroClienteComponent', () => {
     nombre: 'augusto',
     correo: 'augusto@store.co',
     direccion: 'calle 123',
-    contrasena: '123456789',
+    contrasena: 'Augusto1234!',
   };
 
   beforeEach(async () => {

@@ -49,7 +49,7 @@ export class RegistroClienteComponent {
       Validators.maxLength(200),
       Validators.minLength(8),
       Validators.pattern(
-        /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~\-]).*$/
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~-]).*$/
       ),
     ]),
   });
