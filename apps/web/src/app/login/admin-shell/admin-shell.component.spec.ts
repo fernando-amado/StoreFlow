@@ -8,8 +8,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 
-import { TipoAlerta } from 'libs/design-system/src/lib/components/alerta/alerta.model';
-import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
+import { AlertaService, TipoAlerta } from '@storeflow/design-system';
 import { MensajesAlertas } from '../login.constantes';
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';

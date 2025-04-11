@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  AlertaService,
   AuthService,
   DatosIngreso,
+  TipoAlerta,
   TipoCategoria,
 } from '@storeflow/design-system';
-import { TipoAlerta } from 'libs/design-system/src/lib/components/alerta/alerta.model';
-import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
+
 import { MensajesAlertas } from '../../app.constantes';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { LoginComponent } from '../../shared/login/login.component';

@@ -7,12 +7,13 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
+  AlertaService,
   AuthService,
   DatosIngreso,
   SharedModule,
+  TipoAlerta,
 } from '@storeflow/design-system';
-import { TipoAlerta } from 'libs/design-system/src/lib/components/alerta/alerta.model';
-import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
+
 import { HeaderComponent } from '../../shared/header/header.component';
 import { MensajesAlertas } from '../login.constantes';
 import { LoginService } from '../login.service';

@@ -6,9 +6,11 @@ import {
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
-import { TipoCategoria } from '@storeflow/design-system';
-import { TipoAlerta } from 'libs/design-system/src/lib/components/alerta/alerta.model';
-import { AlertaService } from 'libs/design-system/src/lib/components/alerta/alerta.service';
+import {
+  AlertaService,
+  TipoAlerta,
+  TipoCategoria,
+} from '@storeflow/design-system';
 import { MensajesAlertas } from '../../app.constantes';
 import { LoginService } from '../login.service';
 import { LoginUrls } from '../login.urls';
