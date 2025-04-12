@@ -37,25 +37,37 @@
               />
             </mat-form-field>
           </div>
-          <div class="row gap-9 align-items-center">
-            <mat-form-field appearance="outline" class="flex-1">
-              <input
-                matInput
-                [type]="tipoInput"
-                data-testid="input-registro-cliente-contrasena"
-                i18n-placeholder="login.registroCliente.contrasena"
-                placeholder="Contraseña"
-                formControlName="contrasena"
-              />
-            </mat-form-field>
-            <mat-icon
-              style="color: #323232"
-              data-testid="boton-registro-cliente-contrasena"
-              class="mat-icon-outlined cursor-pointer"
-              (click)="mostrarContrasena($event)"
-              >{{ iconoInput }}</mat-icon
-            >
+          <div>
+            <div class="row gap-9 align-items-center">
+              <mat-form-field appearance="outline" class="flex-1">
+                <input
+                  matInput
+                  [type]="tipoInput"
+                  data-testid="input-registro-cliente-contrasena"
+                  i18n-placeholder="login.registroCliente.contrasena"
+                  placeholder="Contraseña"
+                  formControlName="contrasena"
+                />
+              </mat-form-field>
+              <mat-icon
+                style="color: #323232"
+                data-testid="boton-registro-cliente-contrasena"
+                class="mat-icon-outlined cursor-pointer"
+                (click)="mostrarContrasena($event)"
+                >{{ iconoInput }}</mat-icon
+              >
+            </div>
+            @if (contrasenaInvalidad) {
+              <mat-error
+                name="contrasenaIncorrecta"
+                i18n="login.registroCliente.contrasenaInvalida"
+                >La contraseña no es válida. Debe tener al menos 8 caracteres,
+                incluir una letra mayúscula, un número y un carácter
+                especial.</mat-error
+              >
+            }
           </div>
+
           <div class="row justify-content-end flex-1">
             <button
               data-testid="boton-guardar-cliente"

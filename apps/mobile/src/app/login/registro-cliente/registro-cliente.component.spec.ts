@@ -95,4 +95,28 @@ describe('RegistroClienteComponent', () => {
     expect(alertaService.abrirAlerta).toHaveBeenCalledWith(esperadoAlerta);
     expect(router.navigateByUrl).toHaveBeenCalledWith('/login/cliente');
   });
+
+  it('debe mostrar la seccion de "contrasenaIncorrecta", cuando no tiene el formato de contrasena', () => {
+    const control = component.formulario.get('contrasena');
+    control?.setValue('12345678');
+    control?.markAsTouched();
+
+    fixture.detectChanges();
+    const contrasenaIncorrecta = fixture.debugElement.query(
+      By.css('[name="contrasenaIncorrecta"]')
+    );
+    expect(contrasenaIncorrecta).toBeTruthy();
+  });
+
+  it('debe ocultarse la seccion de "contrasenaIncorrecta", cuando  tiene el formato de contrasena', () => {
+    const control = component.formulario.get('contrasena');
+    control?.setValue(formulario.contrasena);
+    control?.markAsTouched();
+
+    fixture.detectChanges();
+    const contrasenaIncorrecta = fixture.debugElement.query(
+      By.css('[data-testid="contrasenaIncorrecta"]')
+    );
+    expect(contrasenaIncorrecta).toBeFalsy();
+  });
 });

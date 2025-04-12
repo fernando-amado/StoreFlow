@@ -54,6 +54,13 @@ export class RegistroClienteComponent {
     ]),
   });
 
+  get contrasenaInvalidad() {
+    return (
+      this.formulario.get('contrasena')?.invalid &&
+      this.formulario.get('contrasena')?.touched
+    );
+  }
+
   get iconoInput() {
     return this.mostrar() ? 'visibility_off' : 'visibility';
   }
