@@ -44,3 +44,11 @@
 .bg-grey-100 {
   background-color: map-get($grey, 100) !important;
 }
+
+.color-success {
+  color: map-get($success, 800);
+}
+
+.color-warn {
+  color: map-get($warn, 800);
+}

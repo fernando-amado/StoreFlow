@@ -1,6 +1,9 @@
 .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
+.mdc-list {
+  padding: 0px !important;
+}
 .mat-icon {
   display: flex !important;
   align-items: center;
@@ -17,4 +20,5 @@ input::-webkit-inner-spin-button {
   --mat-toolbar-title-text-weight: 500;
   --mat-toolbar-title-text-line-height: 150%;
   --mat-toolbar-title-text-letter-spacing: 1px;
+  --mdc-list-list-item-one-line-container-height: 56px;
 }
