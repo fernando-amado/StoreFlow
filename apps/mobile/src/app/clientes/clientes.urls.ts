@@ -1,0 +1,5 @@
+import { environment } from '../../environments/environment';
+
+export const ClientesUrls = {
+  obtenerProductos: `${environment.apiUrl}/productos`,
+};

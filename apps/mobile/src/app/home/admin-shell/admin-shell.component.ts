@@ -14,7 +14,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
       [categoriaUsuario]="sesion.categoria"
       [nombreUsuario]="sesion.nombreUsuario"
     ></app-header>
-    <div class="contenido-mobile column">
+    <div class="contenido-mobile ">
       <router-outlet></router-outlet>
     </div>
   </div> `,

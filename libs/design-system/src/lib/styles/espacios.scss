@@ -28,6 +28,10 @@
   gap: 24px;
 }
 
+.gap-2 {
+  gap: 2px;
+}
+
 //Paddins
 .p-16 {
   padding: 16px;
@@ -43,4 +47,8 @@
 
 .py-8 {
   padding-block: 8px;
+}
+
+.pt-8 {
+  margin-top: 8px;
 }
