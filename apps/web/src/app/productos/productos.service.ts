@@ -9,13 +9,13 @@ export class ProductosService {
   http = inject(HttpClient);
 
   obtenerListadoFabricantes(): Observable<ListadoFabricantes[]> {
-    return this.http.get<ListadoFabricantes[]>(
-      ProductosUrls.obtenerListadoFabricantes
-    );
-    // return of([
-    //   { id: 1, nombre: 'Fabricante 1' },
-    //   { id: 2, nombre: 'Fabricante 2' },
-    // ]);
+    // return this.http.get<ListadoFabricantes[]>(
+    //   ProductosUrls.obtenerListadoFabricantes
+    // );
+    return of([
+      { id: 1, nombre: 'Fabricante 1' },
+      { id: 2, nombre: 'Fabricante 2' },
+    ]);
   }
 
   guardarProducto(producto: Producto): Observable<void> {
