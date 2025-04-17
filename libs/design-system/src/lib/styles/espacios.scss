@@ -16,6 +16,10 @@
 .gap-9 {
   gap: 9px;
 }
+
+.gap-10 {
+  gap: 10px;
+}
 .gap-40 {
   gap: 40px;
 }
@@ -28,6 +32,9 @@
   gap: 24px;
 }
 
+.gap-17 {
+  gap: 17px;
+}
 //Paddins
 .p-16 {
   padding: 16px;
@@ -37,10 +44,18 @@
   padding: 12px !important;
 }
 
+.p-10 {
+  padding: 10px;
+}
+
 .px-16 {
   padding-inline: 16px;
 }
 
 .py-8 {
   padding-block: 8px;
+}
+
+.pt-12 {
+  padding-top: 12px;
 }

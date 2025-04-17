@@ -4,11 +4,12 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Alerta, AlertaService, TipoAlerta } from '@storeflow/design-system';
 import { MensajesProductos } from '../productos.contantes';
-import { ListadoFabricantes, Producto } from '../productos.model';
+import { ListadoFabricantes, RegistrarProducto } from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { ProductosUrls } from '../productos.urls';
 import { RegistrarProductosComponent } from './registrar-productos.component';
@@ -19,7 +20,7 @@ describe('RegistrarProductosComponent', () => {
   let alertaService: Partial<AlertaService>;
   let httpMock: HttpTestingController;
 
-  const formulario: Producto = {
+  const formulario: RegistrarProducto = {
     nombre: 'Producto 1',
     fabricanteAsociado: 1,
     codigo: 1213,
@@ -39,6 +40,7 @@ describe('RegistrarProductosComponent', () => {
           provide: AlertaService,
           useValue: alertaService,
         },
+        MatDialog,
       ],
       imports: [RegistrarProductosComponent, BrowserAnimationsModule],
     }).compileComponents();
@@ -105,5 +107,13 @@ describe('RegistrarProductosComponent', () => {
       codigo: null,
       fabricanteAsociado: null,
     });
+  });
+  it('debe abrir el modal de registrar productos masivo', () => {
+    const openSpy = jest.spyOn(component.dialog, 'open');
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-registrar-productos-masivo"]')
+    );
+    boton.nativeElement.click();
+    expect(openSpy).toHaveBeenCalled();
   });
 });

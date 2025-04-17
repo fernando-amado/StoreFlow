@@ -5,14 +5,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import {
   AlertaService,
   SharedModule,
   TipoAlerta,
 } from '@storeflow/design-system';
 import { MensajesProductos } from '../productos.contantes';
-import { ListadoFabricantes, Producto } from '../productos.model';
+import { ListadoFabricantes, RegistrarProducto } from '../productos.model';
 import { ProductosService } from '../productos.service';
+import { RegistrarProductosMasivoComponent } from '../registrar-productos-masivo/registrar-productos-masivo.component';
 
 @Component({
   selector: 'app-registrar-productos',
@@ -25,6 +27,7 @@ export class RegistrarProductosComponent {
   service = inject(ProductosService);
   alertaService = inject(AlertaService);
   listadoFabricantes = signal<ListadoFabricantes[]>([]);
+  dialog = inject(MatDialog);
   formulario = new FormGroup({
     nombre: new FormControl('', [
       Validators.required,
@@ -52,7 +55,7 @@ export class RegistrarProductosComponent {
   }
 
   guardarProducto() {
-    const datosFormulario = this.formulario.value as Producto;
+    const datosFormulario = this.formulario.value as RegistrarProducto;
     this.service.guardarProducto(datosFormulario).subscribe({
       next: () => {
         this.formulario.reset();
@@ -61,6 +64,13 @@ export class RegistrarProductosComponent {
           descricion: MensajesProductos.registroProductoExitoso,
         });
       },
+    });
+  }
+
+  abrirModalRegistrarMasivo() {
+    this.dialog.open(RegistrarProductosMasivoComponent, {
+      width: '1067px',
+      height: '593px',
     });
   }
 }
