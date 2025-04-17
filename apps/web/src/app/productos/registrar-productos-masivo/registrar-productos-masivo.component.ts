@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 
 import { SharedModule, Utilidades } from '@storeflow/design-system';
-import { ResultadoCargaMasiva } from '../productos.model';
+import { EstadoCarga, ResultadoCargaMasiva } from '../productos.model';
 import { ProductosService } from '../productos.service';
 
 @Component({
@@ -15,7 +15,8 @@ import { ProductosService } from '../productos.service';
 export class RegistrarProductosMasivoComponent {
   service = inject(ProductosService);
   datosArchivo = signal<File>({} as File);
-  cargandoMasivo = false;
+  estadoCargaEnum = EstadoCarga;
+  estadoCarga = EstadoCarga.inicial;
   resultadoCarga = signal<ResultadoCargaMasiva>({
     productos: [],
     errores: [],
@@ -34,7 +35,7 @@ export class RegistrarProductosMasivoComponent {
     const archivo = elemento.files?.[0];
     if (archivo) {
       this.datosArchivo.set(archivo);
-      this.cargandoMasivo = true;
+      this.estadoCarga = EstadoCarga.cargando;
       this.cargarProductosMasivoService(archivo);
     }
   }
@@ -42,7 +43,7 @@ export class RegistrarProductosMasivoComponent {
   cargarProductosMasivoService(archivo: File) {
     this.service.cargarProductosMasivo(archivo).subscribe({
       next: (productos) => {
-        this.cargandoMasivo = false;
+        this.estadoCarga = EstadoCarga.completado;
         this.resultadoCarga.set(productos);
       },
     });

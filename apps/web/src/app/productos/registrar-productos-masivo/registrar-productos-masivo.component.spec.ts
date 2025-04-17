@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ResultadoCargaMasiva } from '../productos.model';
+import { EstadoCarga, ResultadoCargaMasiva } from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { ProductosUrls } from '../productos.urls';
 import { RegistrarProductosMasivoComponent } from './registrar-productos-masivo.component';
@@ -46,29 +46,20 @@ describe('RegistrarProductosMasivoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Debe ocultarse la seccion de "cargando-masivo" y mostrarse la seccion de "adjuntar-archivo", cuando la propiedad de "cargandoMasivo" este en false  ', () => {
-    const cargandoMasivo = fixture.debugElement.query(
-      By.css(`[data-testid="cargando-masivo"]`)
-    );
-
+  it('Debe mostrarse la seccion de "adjuntar-archivo", cuando el estado de carga sea inicial  ', () => {
     const adjuntarArchivo = fixture.debugElement.query(
       By.css(`[data-testid="adjuntar-archivo"]`)
     );
-    expect(cargandoMasivo).toBeNull();
     expect(adjuntarArchivo).toBeTruthy();
   });
-  it('Debe mostrarse la seccion de "cargando-masivo" y ocultarse la seccion de "adjuntar-archivo", cuando la propiedad de "cargandoMasivo" este en true  ', () => {
-    component.cargandoMasivo = true;
+
+  it('Debe mostrarse la seccion de "cargando-masivo", cuando el estado de carga sea cargando ', () => {
+    component.estadoCarga = EstadoCarga.cargando;
     fixture.detectChanges();
     const cargandoMasivo = fixture.debugElement.query(
       By.css('[data-testid="cargando-masivo"]')
     );
-
-    const adjuntarArchivo = fixture.debugElement.query(
-      By.css('[data-testid="adjuntar-archivo"]')
-    );
     expect(cargandoMasivo).toBeTruthy();
-    expect(adjuntarArchivo).toBeNull();
   });
 
   it('debe deshabilitar el boton de "guardar-producto-masivo" cuando no hayan productos cargados', () => {

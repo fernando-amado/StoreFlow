@@ -19,3 +19,9 @@ export interface ResultadoCargaMasiva {
   errores: string[];
   productos: Producto[];
 }
+
+export enum EstadoCarga {
+  inicial = 'Inicial',
+  cargando = 'Cargando',
+  completado = 'Completado',
+}
