@@ -106,6 +106,8 @@ describe('RegistrarProductosComponent', () => {
       nombre: null,
       codigo: null,
       fabricanteAsociado: null,
+      precio: null,
+      imagen: null,
     });
   });
 });
