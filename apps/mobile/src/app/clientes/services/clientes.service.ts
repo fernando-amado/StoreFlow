@@ -15,11 +15,11 @@ export class ClientesService {
   }
 
   validarInventarioProducto(producto: Producto): Observable<boolean> {
-    // return this.http.post<boolean>(
-    //   ClientesUrls.validarInventarioProducto,
-    //   producto
-    // );
-    return of(true);
+    return this.http.post<boolean>(
+      ClientesUrls.validarInventarioProducto,
+      producto
+    );
+    // return of(true);
   }
 
   crearPedido(productos: RegistroPedido[]): Observable<void> {

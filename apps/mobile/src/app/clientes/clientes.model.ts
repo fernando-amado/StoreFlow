@@ -21,3 +21,8 @@ export interface RegistroPedido {
   cantidad: number;
   precio: number;
 }
+
+export interface TabsCrearPedido {
+  titulo: string;
+  ruta: string;
+}

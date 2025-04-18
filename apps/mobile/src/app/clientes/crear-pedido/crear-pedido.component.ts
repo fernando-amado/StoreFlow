@@ -1,53 +1,68 @@
 import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from '@storeflow/design-system';
 import { CardInformacionComponent } from '../../shared/card-informacion/card-informacion.component';
-import { ProductosComponent } from '../productos/productos.component';
+import { configuracionTabsCrearPedido } from '../clientes.constantes';
+import { TabsCrearPedido } from '../clientes.model';
 import { ClientesService } from '../services/clientes.service';
 import { ClientesStore } from '../state';
 
 @Component({
   selector: 'app-crear-pedido',
   standalone: true,
-  imports: [SharedModule, CardInformacionComponent, ProductosComponent],
+  imports: [SharedModule, CardInformacionComponent, RouterModule],
   providers: [ClientesService],
   template: `<div class="p-16 column gap-20 heigth-100">
     <app-card-informacion
       [titulo]="titulo"
       [descripcion]="descripcion"
     ></app-card-informacion>
-    <div class="flex-1">
-      <mat-tab-group
+    <div class="flex-1 column">
+      <nav
+        mat-tab-nav-bar
         color="accent"
-        class="heigth-100 tab-100 gap-8"
-        animationDuration="0ms"
+        class="tab-100 "
+        [tabPanel]="tabPanel"
       >
-        <mat-tab>
-          <ng-template mat-tab-label i18n="producto.tabs.productos"
-            >Productos</ng-template
+        @for (tab of tabsCrearPedido; track $index) {
+          <div
+            data-testid="tab-crear-pedido"
+            class="flex-1"
+            name="tab"
+            [active]="estaSeleccionado(tab.ruta)"
+            (click)="seleccionarTab(tab)"
+            mat-tab-link
           >
-          <div class="heigth-100">
-            <app-productos></app-productos>
+            {{ tab.titulo }}
           </div>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label i18n="producto.tabs.pedidosPendientes"
-            >Pedidos pendientes</ng-template
-          >
-          pedidos pendientes
-        </mat-tab>
-      </mat-tab-group>
+        }
+      </nav>
+      <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+      <div class="flex-1">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div> `,
 })
 export class CrearPedidoComponent {
   store = inject(ClientesStore);
-
+  router = inject(Router);
+  tabsCrearPedido = configuracionTabsCrearPedido;
   get titulo() {
     return $localize`:@@tituloCrearPedido:Crear un pedido`;
   }
 
   get descripcion() {
     return $localize`:@@descripcionCrearPedido:Selecciona los productos que necesitas y la cantidad`;
+  }
+
+  seleccionarTab(seleccion: TabsCrearPedido) {
+    this.router.navigateByUrl(seleccion.ruta);
+  }
+
+  estaSeleccionado(url: string) {
+    return this.router.url === url;
   }
 
   constructor() {

@@ -88,6 +88,7 @@ describe('ModalAgregarProductoComponent', () => {
   it('Debe llamarse el servicio que valida el inventario, cuando se le de click al "boton-agregar-producto"', () => {
     const esperado: ProductoSeleccionado = {
       ...producto,
+      seleccionado: true,
       cantidad: component.cantidadProductos(),
     };
     const botonAgregar = fixture.debugElement.query(
@@ -117,6 +118,7 @@ describe('ModalAgregarProductoComponent', () => {
   it('Debe seleccionar el producto, cuando el inventario sea suficiente y cerrar el modal', () => {
     const esperado: ProductoSeleccionado = {
       ...producto,
+      seleccionado: true,
       cantidad: component.cantidadProductos(),
     };
     const botonAgregar = fixture.debugElement.query(

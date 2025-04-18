@@ -6,8 +6,10 @@ import {
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Alerta, AlertaService, TipoAlerta } from '@storeflow/design-system';
 import { MensajesAlertas } from '../../app.constantes';
+import { rutasCrearPedido } from '../clientes.constantes';
 import { ProductoSeleccionado, RegistroPedido } from '../clientes.model';
 import { ClientesUrls } from '../clientes.urls';
 import { ModalAgregarProductoService } from '../modal-agregar-producto/modal-agregar-producto.service';
@@ -20,6 +22,7 @@ describe('ModalCrearPedidoComponent', () => {
   let fixture: ComponentFixture<ModalCrearPedidoComponent>;
   let httpMock: HttpTestingController;
   let alerta: Partial<AlertaService>;
+  let router: Partial<Router>;
 
   const productos: ProductoSeleccionado[] = [
     {
@@ -67,13 +70,18 @@ describe('ModalCrearPedidoComponent', () => {
     alerta = {
       abrirAlerta: jest.fn(),
     };
+    router = {
+      navigateByUrl: jest.fn(),
+    };
     TestBed.overrideProvider(AlertaService, {
       useValue: alerta,
     });
     TestBed.overrideProvider(MatDialogRef, {
       useValue: { close: jest.fn() },
     });
-
+    TestBed.overrideProvider(Router, {
+      useValue: router,
+    });
     await TestBed.configureTestingModule({
       imports: [ModalCrearPedidoComponent],
       providers: [
@@ -115,5 +123,8 @@ describe('ModalCrearPedidoComponent', () => {
     expect(component.dialogRef.close).toHaveBeenCalled();
     expect(component.store.productosSeleccionados()).toEqual([]);
     expect(alerta.abrirAlerta).toHaveBeenCalledWith(esperadoAlerta);
+    expect(router.navigateByUrl).toHaveBeenCalledWith(
+      rutasCrearPedido.pedidosPendientes
+    );
   });
 });
