@@ -13,4 +13,12 @@ export class ClientesService {
     // return this.http.get<Producto[]>(ClientesUrls.obtenerProductos);
     return of(mockProductos);
   }
+
+  validarInventarioProducto(producto: Producto): Observable<boolean> {
+    // return this.http.post<boolean>(
+    //   ClientesUrls.validarInventarioProducto,
+    //   producto
+    // );
+    return of(true);
+  }
 }

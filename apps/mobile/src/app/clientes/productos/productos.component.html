@@ -1,4 +1,4 @@
-<div class="column gap-8 height-100 pb-46">
+<div class="column gap-8 heigth-100 pb-46">
   <div class="row justify-content-end">
     <mat-form-field class="width-240" appearance="outline" class="bg-white">
       <input
@@ -12,11 +12,11 @@
       <mat-icon matSuffix class="color-grey-500">search</mat-icon>
     </mat-form-field>
   </div>
-  <mat-selection-list class="bg-white overflow" #listaProductos>
-    @for (producto of productos(); track $index) {
-      <mat-list-option
+  <mat-list class="bg-white overflow">
+    @for (producto of store.productosFiltradosConSeleccion(); track $index) {
+      <mat-list-item
+        (click)="seleccionarProducto(producto)"
         color="primary"
-        [value]="producto"
         data-testid="lista-seleccionar-producto"
       >
         <div class="row justify-content-between">
@@ -35,10 +35,14 @@
               <p class="color-accent">{{ producto.precio | number }} COP</p>
             </div>
           </div>
+          <mat-checkbox
+            [checked]="producto.seleccionado"
+            disableRipple
+          ></mat-checkbox>
         </div>
-      </mat-list-option>
+      </mat-list-item>
     }
-  </mat-selection-list>
+  </mat-list>
 </div>
 
 <button
@@ -49,5 +53,5 @@
   i18n="ver-carrito"
 >
   <mat-icon>add_shopping_cart</mat-icon>
-  Ver carrito ({{ cantidadProductosSeleccionados }})
+  Ver carrito ({{ store.productosSeleccionados().length }})
 </button>

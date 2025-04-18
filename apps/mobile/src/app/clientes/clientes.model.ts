@@ -3,4 +3,15 @@ export interface Producto {
   nombre: string;
   codigo: string;
   precio: number;
+  seleccionado?: boolean;
+}
+
+export interface ProductoSeleccionado extends Producto {
+  cantidad?: number;
+}
+
+export interface ClientesState {
+  productos: Producto[];
+  filtroProducto: string | null;
+  productosSeleccionados: ProductoSeleccionado[];
 }

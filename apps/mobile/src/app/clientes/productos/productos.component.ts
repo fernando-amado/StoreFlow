@@ -1,36 +1,33 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  input,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectionList } from '@angular/material/list';
 import { SharedModule } from '@storeflow/design-system';
 import { Producto } from '../clientes.model';
+import { ModalAgregarProductoService } from '../modal-agregar-producto/modal-agregar-producto.service';
+import { ClientesStore } from '../state';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
   imports: [SharedModule, ReactiveFormsModule, CommonModule],
+  providers: [ModalAgregarProductoService],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss',
 })
-export class ProductosComponent implements AfterViewInit {
+export class ProductosComponent {
+  modalAgregarProductoService = inject(ModalAgregarProductoService);
+  store = inject(ClientesStore);
   controlBuscar = new FormControl('');
-  productos = input<Producto[]>([]);
-  productosSeleccionados = signal<Producto[]>([]);
-  @ViewChild(MatSelectionList) listaProductos!: MatSelectionList;
 
-  get cantidadProductosSeleccionados() {
-    return this.productosSeleccionados().length;
+  constructor() {
+    this.controlBuscar.valueChanges.subscribe((valor) => {
+      this.store.asignarFiltroProductos(valor);
+    });
   }
 
-  ngAfterViewInit(): void {
-    this.listaProductos.registerOnChange((producto) => {
-      this.productosSeleccionados.set(producto);
-    });
+  seleccionarProducto(producto: Producto) {
+    producto.seleccionado
+      ? this.store.seleccionarProducto(producto)
+      : this.modalAgregarProductoService.abrirModal(producto);
   }
 }

@@ -4,10 +4,14 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { Producto } from '../clientes.model';
 import { ClientesUrls } from '../clientes.urls';
 import { ClientesService } from '../services/clientes.service';
+import { ClientesStore } from '../state';
 import { CrearPedidoComponent } from './crear-pedido.component';
 
 describe('CrearPedidoComponent', () => {
@@ -31,10 +35,15 @@ describe('CrearPedidoComponent', () => {
   ];
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CrearPedidoComponent, BrowserAnimationsModule],
+      imports: [
+        CrearPedidoComponent,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
+      ],
       providers: [
         ClientesService,
         HttpTestingController,
+        ClientesStore,
         provideHttpClient(),
         provideHttpClientTesting(),
       ],
@@ -53,6 +62,6 @@ describe('CrearPedidoComponent', () => {
     const peticion = httpMock.expectOne(ClientesUrls.obtenerProductos);
     peticion.flush(esperadoProductos);
     expect(peticion.request.method).toEqual('GET');
-    expect(component.productos()).toEqual(esperadoProductos);
+    expect(component.store.productos()).toEqual(esperadoProductos);
   });
 });

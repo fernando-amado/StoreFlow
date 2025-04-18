@@ -7,7 +7,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
   selector: 'app-admin-shell',
   standalone: true,
   imports: [HeaderComponent, RouterOutlet],
-  template: `<div class="column height-100">
+  template: `<div class="column heigth-100">
     <app-header
       [rutaVolver]="rutaVolver"
       [mostrarAvatar]="true"
