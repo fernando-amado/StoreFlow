@@ -32,9 +32,11 @@ export class ProductosComponent {
   }
 
   seleccionarProducto(producto: Producto) {
-    producto.seleccionado
-      ? this.store.seleccionarProducto({ ...producto, cantidad: 0 })
-      : this.modalAgregarProductoService.abrirModal(producto);
+    if (producto.seleccionado) {
+      this.store.seleccionarProducto({ ...producto, cantidad: 0 });
+    } else {
+      this.modalAgregarProductoService.abrirModal(producto);
+    }
   }
 
   abrirModalCrearPedido() {
