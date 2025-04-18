@@ -26,6 +26,7 @@ export class ProductosComponent {
   }
 
   constructor() {
+    this.store.asignarFiltroProductos('');
     this.controlBuscar.valueChanges.subscribe((valor) => {
       this.store.asignarFiltroProductos(valor);
     });
