@@ -10,6 +10,7 @@ import { ClientesStore } from '../state';
   standalone: true,
   imports: [SharedModule, CommonModule],
   templateUrl: './modal-agregar-producto.component.html',
+  styleUrl: './modal-agregar-producto.component.scss',
 })
 export class ModalAgregarProductoComponent {
   store = inject(ClientesStore);

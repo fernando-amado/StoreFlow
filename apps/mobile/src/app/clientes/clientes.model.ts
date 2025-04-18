@@ -7,11 +7,17 @@ export interface Producto {
 }
 
 export interface ProductoSeleccionado extends Producto {
-  cantidad?: number;
+  cantidad: number;
 }
 
 export interface ClientesState {
   productos: Producto[];
   filtroProducto: string | null;
   productosSeleccionados: ProductoSeleccionado[];
+}
+
+export interface RegistroPedido {
+  codigo: string;
+  cantidad: number;
+  precio: number;
 }

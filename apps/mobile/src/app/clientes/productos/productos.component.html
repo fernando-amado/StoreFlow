@@ -51,7 +51,9 @@
   color="accent"
   class="boton-ver-carrito"
   i18n="ver-carrito"
+  [disabled]="!cantidadProductosSeleccionados"
+  (click)="abrirModalCrearPedido()"
 >
   <mat-icon>add_shopping_cart</mat-icon>
-  Ver carrito ({{ store.productosSeleccionados().length }})
+  Ver carrito ({{ cantidadProductosSeleccionados }})
 </button>

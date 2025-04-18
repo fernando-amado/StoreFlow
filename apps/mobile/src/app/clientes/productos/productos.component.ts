@@ -4,20 +4,26 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@storeflow/design-system';
 import { Producto } from '../clientes.model';
 import { ModalAgregarProductoService } from '../modal-agregar-producto/modal-agregar-producto.service';
+import { ModalCrearPedidoService } from '../modal-crear-pedido/modal-crear-pedido.service';
 import { ClientesStore } from '../state';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
   imports: [SharedModule, ReactiveFormsModule, CommonModule],
-  providers: [ModalAgregarProductoService],
+  providers: [ModalAgregarProductoService, ModalCrearPedidoService],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss',
 })
 export class ProductosComponent {
   modalAgregarProductoService = inject(ModalAgregarProductoService);
+  modalCrearPedidoService = inject(ModalCrearPedidoService);
   store = inject(ClientesStore);
   controlBuscar = new FormControl('');
+
+  get cantidadProductosSeleccionados(): number {
+    return this.store.productosSeleccionados().length;
+  }
 
   constructor() {
     this.controlBuscar.valueChanges.subscribe((valor) => {
@@ -27,7 +33,11 @@ export class ProductosComponent {
 
   seleccionarProducto(producto: Producto) {
     producto.seleccionado
-      ? this.store.seleccionarProducto(producto)
+      ? this.store.seleccionarProducto({ ...producto, cantidad: 0 })
       : this.modalAgregarProductoService.abrirModal(producto);
+  }
+
+  abrirModalCrearPedido() {
+    this.modalCrearPedidoService.abrirModal();
   }
 }

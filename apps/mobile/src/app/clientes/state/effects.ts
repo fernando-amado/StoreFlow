@@ -4,7 +4,11 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { AlertaService, SignalsOf, TipoAlerta } from '@storeflow/design-system';
 import { pipe, switchMap, tap } from 'rxjs';
 import { MensajesAlertas } from '../../app.constantes';
-import { ClientesState, ProductoSeleccionado } from '../clientes.model';
+import {
+  ClientesState,
+  ProductoSeleccionado,
+  RegistroPedido,
+} from '../clientes.model';
 import { ModalAgregarProductoService } from '../modal-agregar-producto/modal-agregar-producto.service';
 import { ClientesService } from '../services/clientes.service';
 
@@ -62,10 +66,29 @@ export const effectsStore = withMethods(
       )
     );
 
+    const crearPedido = rxMethod<RegistroPedido[]>(
+      pipe(
+        switchMap((productos) =>
+          service.crearPedido(productos).pipe(
+            tap(() => {
+              patchState(store, {
+                productosSeleccionados: [],
+              });
+              alertaService.abrirAlerta({
+                tipo: TipoAlerta.Success,
+                descricion: MensajesAlertas.pedidoCreado,
+              });
+            })
+          )
+        )
+      )
+    );
+
     const effects = {
       obtenerProductos,
       validarInventarioProducto,
       seleccionarProducto,
+      crearPedido,
     };
 
     return effects;

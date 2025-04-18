@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Producto, ProductoSeleccionado } from '../clientes.model';
 import { ClientesUrls } from '../clientes.urls';
 import { ModalAgregarProductoService } from '../modal-agregar-producto/modal-agregar-producto.service';
+import { ModalCrearPedidoService } from '../modal-crear-pedido/modal-crear-pedido.service';
 import { ClientesService } from '../services/clientes.service';
 import { ClientesStore } from '../state';
 import { ProductosComponent } from './productos.component';
@@ -23,6 +24,7 @@ describe('ProductosComponent', () => {
   let fixture: ComponentFixture<ProductosComponent>;
   let httpMock: HttpTestingController;
   let modalAgregarProducto: Partial<ModalAgregarProductoService>;
+  let modalCrearPedido: Partial<ModalCrearPedidoService>;
   const productos: Producto[] = [
     {
       imagen: 'https://i.ibb.co/Qvcf4M7R/Leche.png',
@@ -48,6 +50,15 @@ describe('ProductosComponent', () => {
     modalAgregarProducto = {
       abrirModal: jest.fn(),
     };
+    modalCrearPedido = {
+      abrirModal: jest.fn(),
+    };
+    TestBed.overrideProvider(ModalAgregarProductoService, {
+      useValue: modalAgregarProducto,
+    });
+    TestBed.overrideProvider(ModalCrearPedidoService, {
+      useValue: modalCrearPedido,
+    });
     await TestBed.configureTestingModule({
       imports: [ProductosComponent, BrowserAnimationsModule],
       providers: [
@@ -56,10 +67,6 @@ describe('ProductosComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         ClientesService,
-        {
-          provide: ModalAgregarProductoService,
-          useValue: modalAgregarProducto,
-        },
       ],
     }).compileComponents();
     httpMock = TestBed.inject(HttpTestingController);
@@ -110,5 +117,41 @@ describe('ProductosComponent', () => {
     component.store.seleccionarProducto(producto);
     component.seleccionarProducto(producto);
     expect(component.store.productosSeleccionados()).toEqual([]);
+  });
+
+  it('debe desahabilitar el boton de crear pedido, cuando no haya productos seleccionados', () => {
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-ver-carrito"]')
+    );
+    expect(boton.nativeElement.disabled).toBeTruthy();
+  });
+
+  it('debe habilitar el boton de crear pedido, cuando haya productos seleccionados', () => {
+    const producto: ProductoSeleccionado = {
+      ...productos[0],
+      seleccionado: true,
+      cantidad: 1,
+    };
+    component.store.seleccionarProducto(producto);
+    fixture.detectChanges();
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-ver-carrito"]')
+    );
+    expect(boton.nativeElement.disabled).toBeFalsy();
+  });
+
+  it('debe abrir el modal de crear pedido, cuando se le de click al "boton-ver-carrito" ', () => {
+    const producto: ProductoSeleccionado = {
+      ...productos[0],
+      seleccionado: true,
+      cantidad: 1,
+    };
+    component.store.seleccionarProducto(producto);
+    fixture.detectChanges();
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-ver-carrito"]')
+    );
+    boton.nativeElement.click();
+    expect(modalCrearPedido.abrirModal).toHaveBeenCalled();
   });
 });

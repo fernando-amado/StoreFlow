@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Producto } from '../clientes.model';
+import { Producto, RegistroPedido } from '../clientes.model';
 import { ClientesUrls } from '../clientes.urls';
 import { mockProductos } from '../mocks-clientes';
 
@@ -10,8 +10,8 @@ export class ClientesService {
   http = inject(HttpClient);
 
   obtenerProductos(): Observable<Producto[]> {
-    // return this.http.get<Producto[]>(ClientesUrls.obtenerProductos);
-    return of(mockProductos);
+    return this.http.get<Producto[]>(ClientesUrls.obtenerProductos);
+    // return of(mockProductos);
   }
 
   validarInventarioProducto(producto: Producto): Observable<boolean> {
@@ -20,5 +20,10 @@ export class ClientesService {
     //   producto
     // );
     return of(true);
+  }
+
+  crearPedido(productos: RegistroPedido[]): Observable<void> {
+    return this.http.post<void>(ClientesUrls.crearPedido, productos);
+    // return of(void 0);
   }
 }
