@@ -13,7 +13,7 @@ describe('ResultadoCargaMasivaComponent', () => {
     productos: [
       {
         nombre: 'Paca de leche x12 unidades',
-        fabricanteAsociado: 'Alquería S.A.',
+        fabricanteAsociado: { id: 2, nombre: 'Alquería S.A.' },
         codigo: 'A7X9B3Q5LZ82MND4VYKCJ6T1W0GFRP',
         imagen:
           'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',

@@ -64,7 +64,6 @@ export class RegistrarProductosMasivoComponent {
       })) ?? []
     );
   }
-  constructor() {}
 
   adjuntarArchivo(event: Event) {
     const elemento = event.target as HTMLInputElement;
