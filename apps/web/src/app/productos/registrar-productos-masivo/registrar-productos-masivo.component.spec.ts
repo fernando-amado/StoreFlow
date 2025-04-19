@@ -4,9 +4,15 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
+import { AlertaService } from '@storeflow/design-system';
 import { EstadoCarga } from '../productos.enum';
-import { ResultadoCargaMasiva } from '../productos.model';
+import {
+  Producto,
+  RegistrarProducto,
+  ResultadoCargaMasiva,
+} from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { ProductosUrls } from '../productos.urls';
 import { RegistrarProductosMasivoComponent } from './registrar-productos-masivo.component';
@@ -14,24 +20,42 @@ import { RegistrarProductosMasivoComponent } from './registrar-productos-masivo.
 describe('RegistrarProductosMasivoComponent', () => {
   let component: RegistrarProductosMasivoComponent;
   let fixture: ComponentFixture<RegistrarProductosMasivoComponent>;
-
+  let alerta: Partial<AlertaService>;
   let httpMock: HttpTestingController;
+
+  const productos: Producto[] = [
+    {
+      nombre: 'Paca de leche x12 unidades',
+      fabricanteAsociado: { id: 2, nombre: 'Alquería S.A.' },
+      codigo: 'A7X9B3Q5LZ82MND4VYKCJ6T1W0GFRP',
+      imagen:
+        'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',
+      precio: 1000,
+    },
+  ];
 
   const resultadoCarga: ResultadoCargaMasiva = {
     errores: ['Alimentos SAS S.A.S.'],
-    productos: [
-      {
-        nombre: 'Paca de leche x12 unidades',
-        fabricanteAsociado: 'Alquería S.A.',
-        codigo: 'A7X9B3Q5LZ82MND4VYKCJ6T1W0GFRP',
-        imagen:
-          'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',
-        precio: 1000,
-      },
-    ],
+    productos,
   };
 
+  const productosAGuardar: RegistrarProducto[] = [
+    {
+      ...productos[0],
+      fabricanteAsociado: productos[0].fabricanteAsociado.id,
+    },
+  ];
+
   beforeEach(async () => {
+    alerta = {
+      abrirAlerta: jest.fn(),
+    };
+    TestBed.overrideProvider(AlertaService, {
+      useValue: alerta,
+    });
+    TestBed.overrideProvider(MatDialogRef, {
+      useValue: { close: jest.fn() },
+    });
     await TestBed.configureTestingModule({
       providers: [
         ProductosService,
@@ -69,14 +93,14 @@ describe('RegistrarProductosMasivoComponent', () => {
 
   it('debe deshabilitar el boton de "guardar-producto-masivo" cuando no hayan productos cargados', () => {
     const boton = fixture.debugElement.query(
-      By.css('button[data-testid="boton-guardar-producto-masivo"]')
+      By.css('button[data-testid="boton-guardar-productos-masivo"]')
     );
     expect(boton.nativeElement.disabled).toBeTruthy();
   });
 
   it('debe habilitarse el boton de "guardar-producto-masivo" cuando hayan productos cargados', () => {
     const boton = fixture.debugElement.query(
-      By.css('button[data-testid="boton-guardar-producto-masivo"]')
+      By.css('button[data-testid="boton-guardar-productos-masivo"]')
     );
     component.resultadoCarga.set(resultadoCarga);
     fixture.detectChanges();
@@ -102,5 +126,24 @@ describe('RegistrarProductosMasivoComponent', () => {
     expect(peticion.request.body).toEqual(esperadoBody);
     peticion.flush(resultadoCarga);
     expect(component.resultadoCarga()).toEqual(resultadoCarga);
+  });
+
+  it('debe guardar los productos masivos, cuando se haga click en el boton "guardar-producto-masivo" ', () => {
+    component.resultadoCarga.set(resultadoCarga);
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-guardar-productos-masivo"]')
+    );
+    fixture.detectChanges();
+    boton.nativeElement.click();
+
+    const peticionGuardar = httpMock.expectOne(
+      ProductosUrls.guardarProductosMasivos
+    );
+    expect(peticionGuardar.request.method).toEqual('POST');
+    expect(peticionGuardar.request.body).toEqual(productosAGuardar);
+    peticionGuardar.flush({});
+
+    expect(component.dialogRef.close).toHaveBeenCalled();
+    expect(alerta.abrirAlerta).toHaveBeenCalledWith(component.alerta);
   });
 });

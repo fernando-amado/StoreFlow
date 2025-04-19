@@ -1,8 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { SharedModule, Utilidades } from '@storeflow/design-system';
+import { MatDialogRef } from '@angular/material/dialog';
+import {
+  Alerta,
+  AlertaService,
+  SharedModule,
+  TipoAlerta,
+  Utilidades,
+} from '@storeflow/design-system';
+import { MensajesProductos } from '../productos.contantes';
 import { EstadoCarga } from '../productos.enum';
-import { ResultadoCargaMasiva } from '../productos.model';
+import {
+  Producto,
+  RegistrarProducto,
+  ResultadoCargaMasiva,
+} from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { ResultadoCargaMasivaComponent } from '../resultado-carga-masiva/resultado-carga-masiva.component';
 
@@ -16,10 +28,14 @@ import { ResultadoCargaMasivaComponent } from '../resultado-carga-masiva/resulta
 })
 export class RegistrarProductosMasivoComponent {
   service = inject(ProductosService);
+  dialogRef = inject(MatDialogRef<RegistrarProductosMasivoComponent>);
+  alertaService = inject(AlertaService);
   datosArchivo = signal<File>({} as File);
   estadoCargaEnum = EstadoCarga;
   estadoCarga = EstadoCarga.inicial;
-  resultadoCarga = signal<ResultadoCargaMasiva>({} as ResultadoCargaMasiva);
+  resultadoCarga = signal<ResultadoCargaMasiva>({
+    productos: [] as Producto[],
+  } as ResultadoCargaMasiva);
 
   get tamanioArchivo() {
     return Utilidades.obtenerTamanioArchivo(this.datosArchivo().size);
@@ -29,9 +45,26 @@ export class RegistrarProductosMasivoComponent {
     return this.estadoCarga === EstadoCarga.completado;
   }
 
-  get disabledButton() {
-    return !this.resultadoCarga().productos;
+  get tieneProductosCargados() {
+    return this.resultadoCarga().productos.length;
   }
+
+  get alerta(): Alerta {
+    return {
+      tipo: TipoAlerta.Success,
+      descricion: MensajesProductos.registroProductoExitoso,
+    };
+  }
+
+  get productosAGuardar(): RegistrarProducto[] {
+    return (
+      this.resultadoCarga().productos.map((producto) => ({
+        ...producto,
+        fabricanteAsociado: producto.fabricanteAsociado.id,
+      })) ?? []
+    );
+  }
+  constructor() {}
 
   adjuntarArchivo(event: Event) {
     const elemento = event.target as HTMLInputElement;
@@ -45,13 +78,24 @@ export class RegistrarProductosMasivoComponent {
 
   cargarProductosMasivoService(archivo: File) {
     this.service.cargarProductosMasivo(archivo).subscribe({
-      next: (productos) => {
+      next: (resultadoCarga) => {
         this.estadoCarga = EstadoCarga.completado;
-        this.resultadoCarga.set(productos);
+        this.resultadoCarga.set(resultadoCarga);
       },
       error: () => {
         this.estadoCarga = EstadoCarga.inicial;
       },
     });
+  }
+
+  guardarProductosMasivos() {
+    if (this.tieneProductosCargados) {
+      this.service.guardarProductosMasivos(this.productosAGuardar).subscribe({
+        next: () => {
+          this.dialogRef.close();
+          this.alertaService.abrirAlerta(this.alerta);
+        },
+      });
+    }
   }
 }

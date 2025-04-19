@@ -5,7 +5,7 @@ export interface ListadoFabricantes {
 
 export interface Producto {
   nombre: string;
-  fabricanteAsociado?: string;
+  fabricanteAsociado: ListadoFabricantes;
   codigo: string;
   precio: number;
   imagen: string;
@@ -14,7 +14,7 @@ export interface Producto {
 export interface RegistrarProducto {
   nombre: string;
   fabricanteAsociado: number;
-  codigo: number;
+  codigo: string;
   precio: number;
   imagen: string;
 }

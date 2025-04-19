@@ -24,7 +24,7 @@ describe('RegistrarProductosComponent', () => {
   const formulario: RegistrarProducto = {
     nombre: 'Producto 1',
     fabricanteAsociado: 1,
-    codigo: 1213,
+    codigo: 'A7X9B3Q5LZ82MND4VYKCJ6T1W0GFRP',
     precio: 100,
     imagen: 'https://example.com/image.png',
   };

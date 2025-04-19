@@ -38,4 +38,12 @@ export class ProductosService {
 
     return of(productosSimulados).pipe(delay(10000));
   }
+
+  guardarProductosMasivos(productos: RegistrarProducto[]) {
+    return this.http.post<void>(
+      ProductosUrls.guardarProductosMasivos,
+      productos
+    );
+    return of(void 0);
+  }
 }

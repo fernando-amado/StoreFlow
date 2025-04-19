@@ -11,11 +11,7 @@ import {
   TipoAlerta,
 } from '@storeflow/design-system';
 import { MensajesProductos } from '../productos.contantes';
-import {
-  ListadoFabricantes,
-  Producto,
-  RegistrarProducto,
-} from '../productos.model';
+import { ListadoFabricantes, RegistrarProducto } from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { RegistrarProductosMasivoService } from '../registrar-productos-masivo/registrar-productos-masivo.service';
 
@@ -39,7 +35,7 @@ export class RegistrarProductosComponent {
     fabricanteAsociado: new FormControl<number | null>(null, [
       Validators.required,
     ]),
-    codigo: new FormControl<number | null>(null, [
+    codigo: new FormControl<string | null>(null, [
       Validators.required,
       Validators.maxLength(50),
     ]),

@@ -14,7 +14,7 @@ export const productosSimulados: ResultadoCargaMasiva = {
   productos: [
     {
       nombre: 'Paca de leche x12 unidades',
-      fabricanteAsociado: 'Alquería S.A.',
+      fabricanteAsociado: { id: 2, nombre: 'Alquería S.A.' },
       codigo: 'A7X9B3Q5LZ82MND4VYKCJ6T1W0GFRP',
       imagen:
         'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',
@@ -22,7 +22,7 @@ export const productosSimulados: ResultadoCargaMasiva = {
     },
     {
       nombre: 'Chocolatinas JET x40 unidades',
-      fabricanteAsociado: 'Grupo Nutresa S.A.',
+      fabricanteAsociado: { id: 1, nombre: 'Grupo Nutresa S.A.' },
       codigo: 'MND4VYKCJ6T1W0GFRP',
       imagen:
         'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',
@@ -30,7 +30,7 @@ export const productosSimulados: ResultadoCargaMasiva = {
     },
     {
       nombre: 'Galletas Festival x 10 unidades',
-      fabricanteAsociado: 'Grupo Nutresa S.A.',
+      fabricanteAsociado: { id: 1, nombre: 'Grupo Nutresa S.A.' },
       codigo: 'A7X9B3Q5LZ82MND4VY',
       imagen:
         'https://www.alqueria.com.co/sites/default/files/2022-09/Alqueria_LecheEnteraLargaVida_1L.png',

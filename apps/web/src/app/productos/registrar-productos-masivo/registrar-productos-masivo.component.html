@@ -79,11 +79,12 @@
     </div>
     <div class="row justify-content-end">
       <button
-        [disabled]="disabledButton"
+        [disabled]="!tieneProductosCargados"
         color="primary"
-        data-testid="boton-guardar-producto-masivo"
+        data-testid="boton-guardar-productos-masivo"
         mat-raised-button
         i18n="guardar"
+        (click)="guardarProductosMasivos()"
       >
         Guardar
       </button>
