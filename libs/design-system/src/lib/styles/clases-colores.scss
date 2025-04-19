@@ -18,6 +18,10 @@
   color: map-get($warn, 800);
 }
 
+.color-success {
+  color: map-get($success, 800);
+}
+
 .color-on-surface {
   color: #1d1b20;
 }

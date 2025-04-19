@@ -5,8 +5,21 @@ export interface ListadoFabricantes {
 
 export interface Producto {
   nombre: string;
-  fabricanteAsociado?: number;
+  fabricanteAsociado?: string;
+  codigo: string;
+  precio: number;
+  imagen: string;
+}
+
+export interface RegistrarProducto {
+  nombre: string;
+  fabricanteAsociado: number;
   codigo: number;
   precio: number;
   imagen: string;
+}
+
+export interface ResultadoCargaMasiva {
+  errores: string[];
+  productos: Producto[];
 }

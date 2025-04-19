@@ -8,9 +8,10 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Alerta, AlertaService, TipoAlerta } from '@storeflow/design-system';
 import { MensajesProductos } from '../productos.contantes';
-import { ListadoFabricantes, Producto } from '../productos.model';
+import { ListadoFabricantes, RegistrarProducto } from '../productos.model';
 import { ProductosService } from '../productos.service';
 import { ProductosUrls } from '../productos.urls';
+import { RegistrarProductosMasivoService } from '../registrar-productos-masivo/registrar-productos-masivo.service';
 import { RegistrarProductosComponent } from './registrar-productos.component';
 
 describe('RegistrarProductosComponent', () => {
@@ -18,8 +19,9 @@ describe('RegistrarProductosComponent', () => {
   let fixture: ComponentFixture<RegistrarProductosComponent>;
   let alertaService: Partial<AlertaService>;
   let httpMock: HttpTestingController;
+  let modalRegistrarMasivo: Partial<RegistrarProductosMasivoService>;
 
-  const formulario: Producto = {
+  const formulario: RegistrarProducto = {
     nombre: 'Producto 1',
     fabricanteAsociado: 1,
     codigo: 1213,
@@ -28,6 +30,12 @@ describe('RegistrarProductosComponent', () => {
   };
 
   beforeEach(async () => {
+    modalRegistrarMasivo = {
+      abrirModal: jest.fn(),
+    };
+    TestBed.overrideProvider(RegistrarProductosMasivoService, {
+      useValue: modalRegistrarMasivo,
+    });
     alertaService = {
       abrirAlerta: jest.fn(),
     };
@@ -109,5 +117,12 @@ describe('RegistrarProductosComponent', () => {
       precio: null,
       imagen: null,
     });
+  });
+  it('debe abrir el modal de registrar productos masivo', () => {
+    const boton = fixture.debugElement.query(
+      By.css('button[data-testid="boton-registrar-productos-masivo"]')
+    );
+    boton.nativeElement.click();
+    expect(modalRegistrarMasivo.abrirModal).toHaveBeenCalled();
   });
 });
