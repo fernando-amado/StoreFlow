@@ -11,7 +11,11 @@
     </div>
     <div class="row gap-10 align-items-center">
       <mat-icon class="color-warn">dangerous</mat-icon>
-      <p class="mat-body-1 color-primary cursor-pointer">
+      <p
+        class="mat-body-1 color-primary cursor-pointer"
+        data-testid="boton-ver-errores"
+        (click)="abrirModalErrores()"
+      >
         {{ mensajeCantidadErrores }}
       </p>
     </div>

@@ -49,6 +49,9 @@ export class RegistrarProductosMasivoComponent {
         this.estadoCarga = EstadoCarga.completado;
         this.resultadoCarga.set(productos);
       },
+      error: () => {
+        this.estadoCarga = EstadoCarga.inicial;
+      },
     });
   }
 }

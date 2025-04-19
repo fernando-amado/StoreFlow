@@ -49,3 +49,7 @@
 .bg-grey-100 {
   background-color: map-get($grey, 100) !important;
 }
+
+.bg-warn-50 {
+  background-color: map-get($warn, 50);
+}

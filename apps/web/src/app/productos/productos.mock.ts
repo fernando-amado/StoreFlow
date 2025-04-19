@@ -1,7 +1,16 @@
 import { ResultadoCargaMasiva } from './productos.model';
 //borrar cuando se tenga las rutas
 export const productosSimulados: ResultadoCargaMasiva = {
-  errores: ['Alimentos SAS S.A.S.'],
+  errores: [
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+    'Alimentos SAS S.A.S.',
+  ],
   productos: [
     {
       nombre: 'Paca de leche x12 unidades',
