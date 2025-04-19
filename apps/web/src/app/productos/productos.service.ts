@@ -36,7 +36,7 @@ export class ProductosService {
       formData
     );
 
-    return of(productosSimulados).pipe(delay(10000));
+    return of(productosSimulados).pipe(delay(5000));
   }
 
   guardarProductosMasivos(productos: RegistrarProducto[]) {
